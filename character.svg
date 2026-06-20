@@ -1,0 +1,292 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="400" height="520">
+  <defs>
+    <!-- Wild mane gradient (deep purple to electric blue) -->
+    <linearGradient id="maneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A2080"/>
+      <stop offset="40%" style="stop-color:#5B30A0"/>
+      <stop offset="70%" style="stop-color:#3060C0"/>
+      <stop offset="100%" style="stop-color:#2888E0"/>
+    </linearGradient>
+    <!-- Horn gradient - battle-worn ivory -->
+    <linearGradient id="hornGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#D0C0A0"/>
+      <stop offset="50%" style="stop-color:#E8DCC0"/>
+      <stop offset="100%" style="stop-color:#F5F0E0"/>
+    </linearGradient>
+    <!-- Body fur - deep indigo -->
+    <radialGradient id="bodyFur" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#4A3878"/>
+      <stop offset="100%" style="stop-color:#2E2050"/>
+    </radialGradient>
+    <!-- Lighter fur for inner areas -->
+    <radialGradient id="bodyFurLight" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" style="stop-color:#5A4888"/>
+      <stop offset="100%" style="stop-color:#3A2860"/>
+    </radialGradient>
+    <!-- Chest/belly - gray -->
+    <radialGradient id="chestGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" style="stop-color:#C8C0D0"/>
+      <stop offset="100%" style="stop-color:#A098B0"/>
+    </radialGradient>
+    <!-- Boot leather -->
+    <linearGradient id="bootGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7A6550"/>
+      <stop offset="100%" style="stop-color:#5A4838"/>
+    </linearGradient>
+    <!-- Belt leather -->
+    <linearGradient id="beltGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8A7560"/>
+      <stop offset="100%" style="stop-color:#6A5540"/>
+    </linearGradient>
+    <!-- Glove dark -->
+    <linearGradient id="gloveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A4858"/>
+      <stop offset="100%" style="stop-color:#252F3A"/>
+    </linearGradient>
+    <!-- Bandana red -->
+    <linearGradient id="bandanaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D03030"/>
+      <stop offset="100%" style="stop-color:#A01818"/>
+    </linearGradient>
+    <!-- Snout color -->
+    <radialGradient id="snoutGrad" cx="55%" cy="45%" r="50%">
+      <stop offset="0%" style="stop-color:#9A8570"/>
+      <stop offset="100%" style="stop-color:#7A6858"/>
+    </radialGradient>
+    <!-- Muscle shadow -->
+    <linearGradient id="muscleShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(0,0,0,0.15)"/>
+      <stop offset="100%" style="stop-color:rgba(0,0,0,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== LEGS ===== -->
+  <!-- Left leg - thick, muscular -->
+  <path d="M 145 355 Q 130 370, 128 400 Q 126 430, 130 445 L 170 445 Q 175 430, 173 400 Q 172 370, 168 355 Z"
+        fill="url(#bodyFur)" stroke="#1E1440" stroke-width="2"/>
+  <!-- Left leg muscle line -->
+  <path d="M 150 365 Q 148 390, 150 420" fill="none" stroke="#221848" stroke-width="2" opacity="0.5"/>
+  <!-- Left thigh muscle definition -->
+  <path d="M 160 360 Q 165 380, 162 400" fill="none" stroke="#3A2860" stroke-width="2.5" opacity="0.4"/>
+
+  <!-- Right leg - thick, muscular -->
+  <path d="M 232 355 Q 228 370, 227 400 Q 226 430, 230 445 L 270 445 Q 274 430, 272 400 Q 270 370, 255 355 Z"
+        fill="url(#bodyFur)" stroke="#1E1440" stroke-width="2"/>
+  <!-- Right leg muscle line -->
+  <path d="M 245 365 Q 248 390, 250 420" fill="none" stroke="#221848" stroke-width="2" opacity="0.5"/>
+  <path d="M 238 360 Q 235 380, 237 400" fill="none" stroke="#3A2860" stroke-width="2.5" opacity="0.4"/>
+
+  <!-- ===== COMBAT BOOTS ===== -->
+  <!-- Left boot -->
+  <path d="M 122 438 Q 118 450, 118 462 Q 118 478, 135 482 L 178 482 Q 185 478, 185 462 Q 185 450, 178 438 Z"
+        fill="url(#bootGrad)" stroke="#4A3828" stroke-width="2"/>
+  <!-- Left boot sole -->
+  <path d="M 118 475 Q 120 488, 140 490 L 178 490 Q 186 486, 186 475"
+        fill="#3A2818" stroke="#2A1808" stroke-width="1.5"/>
+  <!-- Left boot details - lace area -->
+  <rect x="140" y="440" width="22" height="25" rx="3" fill="#5A4838" opacity="0.5"/>
+  <line x1="144" y1="447" x2="158" y2="447" stroke="#8A7560" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="144" y1="453" x2="158" y2="453" stroke="#8A7560" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="144" y1="459" x2="158" y2="459" stroke="#8A7560" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Left boot strap -->
+  <path d="M 120 455 Q 150 460, 180 455" fill="none" stroke="#4A3828" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Right boot -->
+  <path d="M 222 438 Q 218 450, 218 462 Q 218 478, 235 482 L 278 482 Q 285 478, 285 462 Q 285 450, 278 438 Z"
+        fill="url(#bootGrad)" stroke="#4A3828" stroke-width="2"/>
+  <!-- Right boot sole -->
+  <path d="M 218 475 Q 220 488, 240 490 L 278 490 Q 286 486, 286 475"
+        fill="#3A2818" stroke="#2A1808" stroke-width="1.5"/>
+  <rect x="240" y="440" width="22" height="25" rx="3" fill="#5A4838" opacity="0.5"/>
+  <line x1="244" y1="447" x2="258" y2="447" stroke="#8A7560" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="244" y1="453" x2="258" y2="453" stroke="#8A7560" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="244" y1="459" x2="258" y2="459" stroke="#8A7560" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 220 455 Q 250 460, 280 455" fill="none" stroke="#4A3828" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- ===== BODY (broad, muscular torso) ===== -->
+  <!-- Main torso - wide V-shape, barrel chest -->
+  <path d="M 105 210 Q 95 250, 100 300 Q 105 340, 140 365 L 260 365 Q 295 340, 300 300 Q 305 250, 295 210 Q 280 195, 200 190 Q 120 195, 105 210 Z"
+        fill="url(#bodyFur)" stroke="#1E1440" stroke-width="2.5"/>
+
+  <!-- Chest plate / lighter fur area -->
+  <path d="M 155 215 Q 140 240, 145 290 Q 150 330, 170 355 L 230 355 Q 250 330, 255 290 Q 260 240, 245 215 Q 225 205, 200 205 Q 175 205, 155 215 Z"
+        fill="url(#chestGrad)" stroke="none"/>
+
+  <!-- Pec muscle definition -->
+  <path d="M 160 225 Q 185 240, 195 235" fill="none" stroke="#8A80A0" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <path d="M 240 225 Q 215 240, 205 235" fill="none" stroke="#8A80A0" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <!-- Ab lines -->
+  <line x1="200" y1="260" x2="200" y2="340" stroke="#8A80A0" stroke-width="1.5" opacity="0.3" stroke-linecap="round"/>
+  <path d="M 175 280 Q 200 285, 225 280" fill="none" stroke="#8A80A0" stroke-width="1.5" opacity="0.25" stroke-linecap="round"/>
+  <path d="M 178 305 Q 200 310, 222 305" fill="none" stroke="#8A80A0" stroke-width="1.5" opacity="0.2" stroke-linecap="round"/>
+
+  <!-- ===== UTILITY BELT ===== -->
+  <path d="M 118 340 Q 140 355, 200 358 Q 260 355, 282 340"
+        fill="none" stroke="url(#beltGrad)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Belt buckle -->
+  <rect x="187" y="340" width="26" height="20" rx="3" fill="#B8A880" stroke="#8A7560" stroke-width="1.5"/>
+  <rect x="193" y="345" width="14" height="10" rx="2" fill="#D0C0A0" stroke="#8A7560" stroke-width="1"/>
+  <!-- Belt pouches -->
+  <rect x="140" y="338" width="18" height="16" rx="3" fill="#7A6550" stroke="#5A4838" stroke-width="1.5"/>
+  <line x1="145" y1="346" x2="153" y2="346" stroke="#5A4838" stroke-width="1" stroke-linecap="round"/>
+  <rect x="242" y="338" width="18" height="16" rx="3" fill="#7A6550" stroke="#5A4838" stroke-width="1.5"/>
+  <line x1="247" y1="346" x2="255" y2="346" stroke="#5A4838" stroke-width="1" stroke-linecap="round"/>
+
+  <!-- ===== ARMS (muscular) ===== -->
+  <!-- Right arm (forward, fist clenched) -->
+  <path d="M 280 215 Q 310 230, 325 260 Q 335 285, 330 310 Q 328 325, 320 335"
+        fill="url(#bodyFurLight)" stroke="#1E1440" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right bicep highlight -->
+  <path d="M 295 225 Q 315 250, 320 275" fill="none" stroke="#4A3878" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <!-- Right forearm muscle -->
+  <path d="M 325 270 Q 330 290, 325 310" fill="none" stroke="#3A2860" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Right glove/gauntlet -->
+  <path d="M 312 308 Q 305 320, 308 335 Q 312 348, 325 350 Q 340 348, 345 335 Q 348 320, 340 308 Z"
+        fill="url(#gloveGrad)" stroke="#1A2028" stroke-width="2"/>
+  <!-- Glove knuckle plate -->
+  <path d="M 315 320 Q 328 315, 340 320" fill="none" stroke="#4A5868" stroke-width="3" stroke-linecap="round"/>
+  <!-- Fingers (clenched fist) -->
+  <path d="M 312 330 Q 310 340, 315 345 Q 320 348, 325 348"
+        fill="url(#gloveGrad)" stroke="#1A2028" stroke-width="1.5"/>
+  <path d="M 338 330 Q 342 340, 338 345 Q 334 348, 328 348"
+        fill="url(#gloveGrad)" stroke="#1A2028" stroke-width="1.5"/>
+  <!-- Fingerless gap (fur showing) -->
+  <circle cx="318" cy="344" r="3" fill="#4A3878"/>
+  <circle cx="328" cy="345" r="3" fill="#4A3878"/>
+  <circle cx="336" cy="342" r="3" fill="#4A3878"/>
+
+  <!-- Left arm (back, fist at side) -->
+  <path d="M 120 215 Q 90 230, 78 260 Q 70 290, 75 320 Q 78 335, 85 345"
+        fill="url(#bodyFurLight)" stroke="#1E1440" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Left bicep bulk -->
+  <path d="M 105 225 Q 88 255, 82 280" fill="none" stroke="#4A3878" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Left glove/gauntlet -->
+  <path d="M 68 318 Q 62 332, 65 345 Q 68 358, 82 360 Q 96 358, 100 345 Q 103 332, 97 318 Z"
+        fill="url(#gloveGrad)" stroke="#1A2028" stroke-width="2"/>
+  <path d="M 72 330 Q 82 326, 95 330" fill="none" stroke="#4A5868" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="75" cy="352" r="3" fill="#4A3878"/>
+  <circle cx="83" cy="354" r="3" fill="#4A3878"/>
+  <circle cx="91" cy="352" r="3" fill="#4A3878"/>
+
+  <!-- ===== HEAD ===== -->
+  <!-- Main head shape - more angular/square jaw -->
+  <path d="M 135 140 Q 120 155, 118 180 Q 116 205, 130 220 Q 145 235, 175 240 L 225 240 Q 255 235, 270 220 Q 284 205, 282 180 Q 280 155, 265 140 Q 245 120, 200 118 Q 155 120, 135 140 Z"
+        fill="url(#bodyFur)" stroke="#1E1440" stroke-width="2.5"/>
+
+  <!-- ===== MANE (wild, spiky mohawk style) ===== -->
+  <!-- Back spikes -->
+  <path d="M 250 130 Q 275 115, 285 140 Q 290 155, 278 160"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <path d="M 260 120 Q 290 100, 298 130 Q 300 148, 285 150"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <!-- Top spikes (mohawk) -->
+  <path d="M 170 120 Q 165 85, 180 70 Q 190 62, 195 80 Q 195 100, 190 115"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <path d="M 185 115 Q 185 75, 200 55 Q 210 48, 215 68 Q 218 90, 210 112"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <path d="M 205 112 Q 210 72, 225 60 Q 235 55, 238 75 Q 240 95, 232 118"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <path d="M 225 118 Q 235 82, 250 75 Q 260 72, 258 90 Q 255 108, 248 125"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <!-- Front spike (hanging over forehead) -->
+  <path d="M 158 130 Q 145 100, 155 82 Q 162 75, 168 90 Q 170 108, 165 128"
+        fill="url(#maneGrad)" stroke="#1E1440" stroke-width="1.5"/>
+  <!-- Electric blue highlights on mane -->
+  <path d="M 190 70 Q 195 60, 205 58" fill="none" stroke="#2888E0" stroke-width="2.5" opacity="0.7" stroke-linecap="round"/>
+  <path d="M 220 65 Q 230 60, 242 62" fill="none" stroke="#2888E0" stroke-width="2" opacity="0.6" stroke-linecap="round"/>
+  <path d="M 280 110 Q 292 105, 295 120" fill="none" stroke="#2888E0" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+
+  <!-- ===== EARS (smaller, tougher looking) ===== -->
+  <!-- Left ear -->
+  <path d="M 138 138 Q 125 115, 132 100 Q 138 90, 148 100 Q 155 115, 148 135"
+        fill="#4A3878" stroke="#1E1440" stroke-width="2"/>
+  <path d="M 137 125 Q 133 112, 138 105 Q 142 100, 146 108 Q 148 118, 145 128"
+        fill="#5A4888" stroke="none"/>
+  <!-- Right ear -->
+  <path d="M 262 138 Q 275 115, 268 100 Q 262 90, 252 100 Q 245 115, 252 135"
+        fill="#4A3878" stroke="#1E1440" stroke-width="2"/>
+  <path d="M 263 125 Q 267 112, 262 105 Q 258 100, 254 108 Q 252 118, 255 128"
+        fill="#5A4888" stroke="none"/>
+
+  <!-- ===== HORN (battle-worn, sharp, weapon-like) ===== -->
+  <path d="M 195 128 L 205 48 L 215 128 Q 210 120, 205 118 Q 200 120, 195 128 Z"
+        fill="url(#hornGrad)" stroke="#8A7560" stroke-width="2"/>
+  <!-- Horn ridges (spiral grooves) -->
+  <line x1="198" y1="118" x2="212" y2="115" stroke="#B8A880" stroke-width="1.5" opacity="0.7"/>
+  <line x1="199" y1="108" x2="211" y2="105" stroke="#B8A880" stroke-width="1.5" opacity="0.6"/>
+  <line x1="201" y1="96" x2="209" y2="93" stroke="#B8A880" stroke-width="1.3" opacity="0.5"/>
+  <line x1="202" y1="84" x2="208" y2="82" stroke="#B8A880" stroke-width="1.2" opacity="0.4"/>
+  <line x1="203" y1="72" x2="207" y2="70" stroke="#B8A880" stroke-width="1" opacity="0.3"/>
+  <!-- Battle scar/nick on horn -->
+  <path d="M 210 90 L 215 86 L 212 94" fill="none" stroke="#8A7560" stroke-width="1.5" opacity="0.6"/>
+  <path d="M 198 100 L 194 97" fill="none" stroke="#8A7560" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- ===== FACE ===== -->
+  <!-- Snout / muzzle - more prominent, rugged -->
+  <path d="M 178 195 Q 170 205, 172 218 Q 175 230, 190 235 L 220 235 Q 235 230, 238 218 Q 240 205, 232 195 Q 215 188, 200 188 Q 185 188, 178 195 Z"
+        fill="url(#snoutGrad)" stroke="#5A4838" stroke-width="1.5"/>
+
+  <!-- Nose (big, dark bear nose) -->
+  <ellipse cx="205" cy="200" rx="12" ry="9" fill="#2A1808" stroke="#1A0800" stroke-width="1"/>
+  <ellipse cx="202" cy="198" rx="4" ry="2.5" fill="#4A3828" opacity="0.6"/>
+
+  <!-- Mouth (confident smirk — one side up) -->
+  <path d="M 188 220 Q 195 226, 205 224 Q 215 222, 228 215"
+        fill="none" stroke="#4A3828" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Slight tooth showing (one fang peeking) -->
+  <path d="M 220 216 L 222 222 L 218 220" fill="#E8E0D0" stroke="#B8A880" stroke-width="0.8"/>
+
+  <!-- ===== EYES (intense, determined) ===== -->
+  <!-- Left eye -->
+  <path d="M 150 165 Q 155 155, 172 155 Q 185 155, 190 165 Q 192 175, 188 182 Q 182 190, 170 190 Q 158 190, 152 182 Q 148 175, 150 165 Z"
+        fill="white" stroke="#1E1440" stroke-width="2"/>
+  <!-- Left iris -->
+  <circle cx="172" cy="174" r="11" fill="#C08020"/>
+  <!-- Left pupil -->
+  <circle cx="174" cy="174" r="6" fill="#1A0800"/>
+  <!-- Left eye shine -->
+  <circle cx="168" cy="169" r="3.5" fill="white" opacity="0.9"/>
+  <circle cx="176" cy="178" r="1.8" fill="white" opacity="0.5"/>
+
+  <!-- Right eye -->
+  <path d="M 215 165 Q 220 155, 235 155 Q 248 155, 252 165 Q 255 175, 250 182 Q 245 190, 233 190 Q 220 190, 216 182 Q 213 175, 215 165 Z"
+        fill="white" stroke="#1E1440" stroke-width="2"/>
+  <!-- Right iris -->
+  <circle cx="235" cy="174" r="11" fill="#C08020"/>
+  <!-- Right pupil -->
+  <circle cx="237" cy="174" r="6" fill="#1A0800"/>
+  <!-- Right eye shine -->
+  <circle cx="231" cy="169" r="3.5" fill="white" opacity="0.9"/>
+  <circle cx="239" cy="178" r="1.8" fill="white" opacity="0.5"/>
+
+  <!-- ===== EYEBROWS (thick, angular — determined/tough) ===== -->
+  <path d="M 145 155 Q 158 142, 180 148 Q 188 150, 192 155"
+        fill="none" stroke="#1E1440" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 255 155 Q 248 142, 228 148 Q 218 150, 212 155"
+        fill="none" stroke="#1E1440" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- ===== SCAR across left eyebrow ===== -->
+  <path d="M 155 145 L 162 158" stroke="#6A5070" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 155 145 L 162 158" stroke="#8A7090" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- ===== BANDANA (tactical style) ===== -->
+  <path d="M 125 228 Q 140 222, 200 218 Q 260 222, 275 228 Q 270 250, 258 258 Q 235 268, 200 270 Q 165 268, 142 258 Q 130 250, 125 228 Z"
+        fill="url(#bandanaGrad)" stroke="#801010" stroke-width="2"/>
+  <!-- Bandana fold lines -->
+  <path d="M 145 235 Q 170 230, 195 228" fill="none" stroke="#B82020" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+  <path d="M 205 228 Q 240 232, 260 238" fill="none" stroke="#B82020" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+  <!-- Bandana tail (hanging to side) -->
+  <path d="M 260 248 Q 280 260, 285 280 Q 288 295, 280 305 Q 275 310, 270 305"
+        fill="url(#bandanaGrad)" stroke="#801010" stroke-width="1.5"/>
+  <path d="M 255 252 Q 272 262, 278 278 Q 282 290, 275 298"
+        fill="none" stroke="#B82020" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- ===== SHOULDER MUSCLE DEFINITION ===== -->
+  <!-- Left shoulder cap -->
+  <path d="M 120 210 Q 105 220, 100 240" fill="none" stroke="#3A2860" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+  <!-- Right shoulder cap -->
+  <path d="M 280 210 Q 295 220, 300 240" fill="none" stroke="#3A2860" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+
+</svg>

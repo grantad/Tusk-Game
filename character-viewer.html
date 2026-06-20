@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tusk — Character Design Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --indigo-deep: #2E2050;
+      --indigo-mid: #4A3878;
+      --purple-glow: #6B4D8A;
+      --electric-blue: #2888E0;
+      --mane-purple: #5B30A0;
+      --gold-eye: #C08020;
+      --red-bandana: #D03030;
+      --boot-brown: #6A5540;
+      --horn-ivory: #E8DCC0;
+      --chest-gray: #C8C0D0;
+      --bg-dark: #0E0A18;
+      --bg-card: rgba(30, 20, 64, 0.7);
+      --text-primary: #E8E0F0;
+      --text-secondary: #9080B0;
+      --accent: #2888E0;
+      --danger: #D03030;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(91, 48, 160, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%, rgba(40, 136, 224, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 90%, rgba(208, 48, 48, 0.05) 0%, transparent 40%);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #E8DCC0 0%, #C08020 30%, #2888E0 70%, #5B30A0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    header .species-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(74, 56, 120, 0.4), rgba(40, 136, 224, 0.2));
+      border: 1px solid rgba(40, 136, 224, 0.3);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--electric-blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Character display */
+    .character-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .character-stage::before {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91, 48, 160, 0.2) 0%, rgba(40, 136, 224, 0.08) 50%, transparent 70%);
+      filter: blur(50px);
+      animation: pulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .character-wrapper {
+      position: relative;
+      z-index: 1;
+      animation: idleBreath 3s ease-in-out infinite;
+    }
+
+    @keyframes idleBreath {
+      0%, 100% { transform: translateY(0) scaleY(1); }
+      50% { transform: translateY(-6px) scaleY(1.01); }
+    }
+
+    .character-wrapper svg,
+    .character-wrapper object {
+      width: 340px;
+      height: 440px;
+      filter: drop-shadow(0 25px 50px rgba(40, 20, 80, 0.5));
+    }
+
+    .ground-shadow {
+      width: 220px;
+      height: 16px;
+      background: radial-gradient(ellipse, rgba(40, 20, 80, 0.5) 0%, transparent 70%);
+      border-radius: 50%;
+      margin: -8px auto 0;
+      animation: shadowPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes shadowPulse {
+      0%, 100% { transform: scaleX(1); opacity: 0.5; }
+      50% { transform: scaleX(0.9); opacity: 0.35; }
+    }
+
+    /* Info grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid rgba(107, 77, 138, 0.15);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(40, 136, 224, 0.3);
+      box-shadow: 0 8px 30px rgba(40, 136, 224, 0.08);
+    }
+
+    .card h3 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .card .value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+    }
+
+    .swatch-label {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    /* Prompt section */
+    .prompt-section {
+      margin-bottom: 48px;
+    }
+
+    .prompt-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .prompt-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid rgba(107, 77, 138, 0.15);
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .prompt-box .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--electric-blue);
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .prompt-box p {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: var(--text-primary);
+      opacity: 0.88;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(40, 136, 224, 0.15);
+      border: 1px solid rgba(40, 136, 224, 0.3);
+      color: var(--electric-blue);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .copy-btn:hover {
+      background: rgba(40, 136, 224, 0.3);
+      color: white;
+    }
+
+    .copy-btn.copied {
+      background: rgba(46, 204, 113, 0.25);
+      border-color: rgba(46, 204, 113, 0.5);
+      color: #2ecc71;
+    }
+
+    /* Abilities */
+    .abilities {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .ability {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: rgba(20, 12, 40, 0.5);
+      border-radius: 12px;
+      border: 1px solid rgba(107, 77, 138, 0.1);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .ability:hover {
+      border-color: rgba(40, 136, 224, 0.25);
+      background: rgba(20, 12, 40, 0.7);
+    }
+
+    .ability .emoji {
+      font-size: 1.5rem;
+    }
+
+    .ability .ability-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ability .ability-name {
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .ability .ability-desc {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Concept art section */
+    .concept-section {
+      margin-bottom: 48px;
+    }
+
+    .concept-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .concept-img-wrapper {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid rgba(107, 77, 138, 0.15);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .concept-img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .concept-caption {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>⚔ Tusk ⚔</h1>
+      <p class="subtitle">Action Platformer Hero — Character Design v2</p>
+      <span class="species-badge">🦄 Unicorn × 🐻 Bear — Unibear</span>
+    </header>
+
+    <!-- Character SVG Display -->
+    <div class="character-stage">
+      <div class="character-wrapper">
+        <object type="image/svg+xml" data="character.svg" aria-label="Tusk character SVG"></object>
+      </div>
+    </div>
+    <div class="ground-shadow"></div>
+
+    <!-- Character Info -->
+    <div class="info-grid">
+      <div class="card">
+        <h3>Name</h3>
+        <div class="value">Tusk</div>
+      </div>
+      <div class="card">
+        <h3>Species</h3>
+        <div class="value">Unibear — Unicorn × Bear Hybrid</div>
+      </div>
+      <div class="card">
+        <h3>Gender</h3>
+        <div class="value">Male</div>
+      </div>
+      <div class="card">
+        <h3>Build</h3>
+        <div class="value">Stocky, broad-shouldered, muscular. Barrel chest with defined pecs and arms. Thick powerful legs.</div>
+      </div>
+      <div class="card">
+        <h3>Personality</h3>
+        <div class="value">Tough but loyal. Fearless in battle, protective of friends. Has a rough exterior but a good heart. Doesn't back down.</div>
+      </div>
+      <div class="card">
+        <h3>Signature Look</h3>
+        <div class="value">Battle-scarred horn, wild spiky mohawk mane, scar across eyebrow, tactical red bandana, fingerless gauntlets, utility belt, combat boots. Confident smirk with a fang.</div>
+      </div>
+      <div class="card" style="grid-column: 1 / -1;">
+        <h3>Color Palette</h3>
+        <div class="color-swatches">
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #4A3878;"></div>
+            <span class="swatch-label">Fur — Deep Indigo</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #C8C0D0;"></div>
+            <span class="swatch-label">Chest — Storm Gray</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: linear-gradient(135deg, #4A2080, #2888E0);"></div>
+            <span class="swatch-label">Mane — Purple/Blue</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #E8DCC0;"></div>
+            <span class="swatch-label">Horn — Worn Ivory</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #C08020;"></div>
+            <span class="swatch-label">Eyes — Amber Gold</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #D03030;"></div>
+            <span class="swatch-label">Bandana — Crimson</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #6A5540;"></div>
+            <span class="swatch-label">Boots — Worn Leather</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background: #3A4858;"></div>
+            <span class="swatch-label">Gauntlets — Dark Steel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Abilities -->
+    <div class="card" style="margin-bottom: 48px;">
+      <h3>Combat Abilities</h3>
+      <div class="abilities">
+        <div class="ability">
+          <span class="emoji">🦏</span>
+          <div class="ability-info">
+            <span class="ability-name">Horn Charge</span>
+            <span class="ability-desc">Devastating forward ram attack</span>
+          </div>
+        </div>
+        <div class="ability">
+          <span class="emoji">💥</span>
+          <div class="ability-info">
+            <span class="ability-name">Bear Slam</span>
+            <span class="ability-desc">Ground-pound that cracks platforms</span>
+          </div>
+        </div>
+        <div class="ability">
+          <span class="emoji">🛡️</span>
+          <div class="ability-info">
+            <span class="ability-name">Arcane Guard</span>
+            <span class="ability-desc">Horn emits a brief force shield</span>
+          </div>
+        </div>
+        <div class="ability">
+          <span class="emoji">🐾</span>
+          <div class="ability-info">
+            <span class="ability-name">Wall Crush</span>
+            <span class="ability-desc">Claw-grip walls, kick off enemies</span>
+          </div>
+        </div>
+        <div class="ability">
+          <span class="emoji">⚡</span>
+          <div class="ability-info">
+            <span class="ability-name">Thunder Pounce</span>
+            <span class="ability-desc">Electrified double-jump strike</span>
+          </div>
+        </div>
+        <div class="ability">
+          <span class="emoji">🔥</span>
+          <div class="ability-info">
+            <span class="ability-name">Fury Mode</span>
+            <span class="ability-desc">Rage power-up, horn glows hot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompts -->
+    <section class="prompt-section">
+      <h2>🎨 Image Generation Prompts</h2>
+
+      <div class="prompt-box" id="prompt-general">
+        <div class="label">General / Midjourney / DALL·E / Stable Diffusion</div>
+        <button class="copy-btn" onclick="copyPrompt('prompt-general-text')">Copy</button>
+        <p id="prompt-general-text">A tough, masculine but kid-friendly male anthropomorphic character for a 2D action platformer game. Full body, front-facing character sheet. He is a "unibear" — a hybrid cross between a unicorn and a bear. He has a broad-shouldered, muscular bear body with a barrel chest showing defined pecs, thick powerful arms with visible bicep definition, and strong legs. His face has a strong square jaw, a rugged bear snout with a large dark nose, intense amber-gold eyes with thick angular determined eyebrows, a confident smirk showing one small fang, and a small scar across his left eyebrow. His unicorn horn is sharp and slightly battle-scarred — it looks more like a weapon than decoration, made of worn ivory. He has a wild, spiky mohawk-style mane in deep purple and electric blue tones (NOT flowing or pretty — rough and edgy). His fur is deep indigo-purple with a lighter storm-gray chest. He wears a tactical crimson-red bandana around his neck with tails hanging to one side, dark steel fingerless gauntlets/gloves showing his clawed paw-tips, a brown leather utility belt with pouches, and heavy worn-leather combat boots with buckle straps. He stands in a confident action-ready power stance with fists clenched, leaning slightly forward, ready for a fight. Art style: bold cartoon with attitude, like Crash Bandicoot or Ratchet and Clank — edgy but still appropriate for kids 8+. Solid white background.</p>
+      </div>
+
+      <div class="prompt-box" id="prompt-spritesheet">
+        <div class="label">Sprite Sheet / Game Art Prompt</div>
+        <button class="copy-btn" onclick="copyPrompt('prompt-spritesheet-text')">Copy</button>
+        <p id="prompt-spritesheet-text">2D action platformer game sprite sheet for a tough male anthropomorphic "unibear" (unicorn-bear hybrid) named "Tusk." Deep indigo-purple fur, muscular broad build, storm-gray chest, battle-scarred ivory unicorn horn, wild spiky purple-and-electric-blue mohawk mane, intense amber-gold eyes, scar across left eyebrow, confident smirk with fang. Wears crimson tactical bandana, dark steel fingerless gauntlets, leather utility belt with pouches, heavy combat boots. Show multiple action poses on transparent background in a grid: idle power stance (fists clenched), running cycle (4 frames, aggressive sprint), jumping (ascending with horn leading), peak jump (arms spread), falling (dive position), landing (crouching impact), horn charge attack (leaning forward, horn glowing), bear slam ground-pound (fist hitting ground, shockwave), wall cling (claws dug in), taking damage (recoiling), fury mode (horn and eyes glowing, mane crackling with energy), victory pose (arms crossed, confident). Bold cartoon vector style with thick dark outlines, suitable for a kids' action platformer. Each sprite approximately 128x128 pixels.</p>
+      </div>
+
+      <div class="prompt-box" id="prompt-portrait">
+        <div class="label">Portrait / Close-Up Prompt</div>
+        <button class="copy-btn" onclick="copyPrompt('prompt-portrait-text')">Copy</button>
+        <p id="prompt-portrait-text">Dramatic close-up portrait of a tough male anthropomorphic "unibear" character (unicorn-bear hybrid) for an action platformer video game. Deep indigo-purple fur, strong angular jaw and rugged bear snout with a large dark nose. Intense, piercing amber-gold eyes with thick angular eyebrows conveying determination and confidence. A small battle scar cuts across his left eyebrow. He has a cocky, knowing smirk with one small fang visible. A battle-scarred ivory unicorn horn juts from his forehead — chipped and worn from combat. His wild, spiky mohawk mane explodes upward in deep purple and electric blue spikes. A crimson tactical bandana is visible at his neck. Background: dark with dramatic lighting — a faint electric-blue glow emanates from behind, casting rim light on his silhouette. Sparks or embers float in the air. Art style: bold action-cartoon, like a cross between Crash Bandicoot and Dragon Ball — tough, cool, masculine, but still kid-appropriate (ages 8+).</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function copyPrompt(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const box = document.getElementById(id).closest('.prompt-box');
+        const btn = box.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0E0A18">
+  <title>TUSK</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #0E0A18;
+      touch-action: none;
+      -webkit-user-select: none; user-select: none;
+      font-family: 'Outfit', 'Avenir Next', 'Helvetica Neue', sans-serif;
+      overscroll-behavior: none;
+    }
+    #game-canvas { display: block; width: 100%; height: 100%; }
+
+    /* ---------- HUD ---------- */
+    #hud {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      color: #fff;
+      display: none;
+    }
+    #hud.visible { display: block; }
+    #hearts {
+      position: absolute;
+      top: calc(12px + env(safe-area-inset-top));
+      left: calc(16px + env(safe-area-inset-left));
+      font-size: 28px;
+      letter-spacing: 4px;
+      text-shadow: 0 2px 4px rgba(0,0,0,.6);
+    }
+    #crystals {
+      position: absolute;
+      top: calc(14px + env(safe-area-inset-top));
+      right: calc(16px + env(safe-area-inset-right));
+      font-size: 22px;
+      font-weight: 800;
+      color: #7FE8FF;
+      text-shadow: 0 2px 4px rgba(0,0,0,.6);
+    }
+    #message {
+      position: absolute;
+      top: 18%;
+      width: 100%;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: #FFD75E;
+      text-shadow: 0 2px 8px rgba(0,0,0,.7);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    #message.visible { opacity: 1; }
+
+    /* ---------- touch controls ---------- */
+    body:not(.touch) .touch-only { display: none !important; }
+    #joystick-zone {
+      position: fixed;
+      left: 0; bottom: 0;
+      width: 45%; height: 55%;
+      pointer-events: auto;
+    }
+    #joystick-base {
+      position: absolute;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 2px solid rgba(255,255,255,.25);
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+    #joystick-knob {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.35);
+      transform: translate(-50%, -50%);
+    }
+    .action-btn {
+      position: fixed;
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.3);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      pointer-events: auto;
+      display: flex; align-items: center; justify-content: center;
+      text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    }
+    .action-btn:active { transform: scale(.92); }
+    #btn-jump {
+      right: calc(24px + env(safe-area-inset-right));
+      bottom: calc(96px + env(safe-area-inset-bottom));
+      background: rgba(40, 136, 224, .45);
+    }
+    #btn-attack {
+      right: calc(116px + env(safe-area-inset-right));
+      bottom: calc(28px + env(safe-area-inset-bottom));
+      background: rgba(208, 48, 48, .45);
+    }
+
+    /* ---------- screens ---------- */
+    .screen {
+      position: fixed; inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background: radial-gradient(ellipse at 50% 35%, rgba(91,48,160,.35) 0%, rgba(14,10,24,.92) 70%);
+      color: #E8E0F0;
+      text-align: center;
+      z-index: 10;
+    }
+    .screen.hidden { display: none; }
+    .screen h1 {
+      font-size: clamp(56px, 14vw, 110px);
+      font-weight: 900;
+      letter-spacing: 8px;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(40,136,224,.8), 0 4px 0 #5B30A0;
+    }
+    .screen h2 { font-size: clamp(30px, 8vw, 56px); font-weight: 900; letter-spacing: 4px; }
+    .screen p { font-size: 17px; color: #9080B0; max-width: 520px; padding: 0 24px; line-height: 1.5; }
+    .screen .stats { font-size: 22px; color: #7FE8FF; font-weight: 700; }
+    .screen button {
+      pointer-events: auto;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 16px 48px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(180deg, #2888E0, #1B5FA8);
+      box-shadow: 0 6px 0 #143F70, 0 10px 24px rgba(0,0,0,.5);
+    }
+    .screen button:active { transform: translateY(4px); box-shadow: 0 2px 0 #143F70; }
+    #win-screen h2 { color: #FFD75E; text-shadow: 0 0 24px rgba(255,215,94,.6); }
+    #death-screen h2 { color: #D03030; }
+
+    /* ---------- fury meter ---------- */
+    #fury-bar {
+      position: absolute;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(220px, 40vw);
+      height: 14px;
+      background: rgba(20, 10, 40, 0.7);
+      border: 2px solid rgba(255, 140, 0, 0.4);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    #fury-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #D03030, #FF8C00, #FFD700);
+      border-radius: 6px;
+      /* no transition — updated every frame from JS */
+    }
+    #fury-glow {
+      position: absolute;
+      inset: -4px;
+      border-radius: 12px;
+      box-shadow: 0 0 14px rgba(255, 140, 0, 0.8), 0 0 28px rgba(255, 69, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    #fury-bar.fury-active {
+      border-color: #FFD700;
+      animation: fury-pulse 0.5s ease-in-out infinite alternate;
+    }
+    #fury-bar.fury-active #fury-fill {
+      background: linear-gradient(90deg, #FFD700, #FF4500, #FFD700);
+    }
+    @keyframes fury-pulse {
+      from { box-shadow: 0 0 8px rgba(255, 215, 0, 0.6); }
+      to { box-shadow: 0 0 20px rgba(255, 69, 0, 0.9); }
+    }
+    #btn-guard {
+      right: calc(24px + env(safe-area-inset-right));
+      bottom: calc(188px + env(safe-area-inset-bottom));
+      background: rgba(40, 200, 120, 0.45);
+    }
+    #btn-fury {
+      right: calc(116px + env(safe-area-inset-right));
+      bottom: calc(120px + env(safe-area-inset-bottom));
+      background: rgba(255, 140, 0, 0.45);
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+
+  <div id="hud">
+    <div id="hearts"></div>
+    <div id="crystals"></div>
+    <div id="message"></div>
+    <div id="joystick-zone" class="touch-only">
+      <div id="joystick-base"><div id="joystick-knob"></div></div>
+    </div>
+    <div id="btn-jump" class="action-btn touch-only">JUMP</div>
+    <div id="btn-attack" class="action-btn touch-only">HORN</div>
+    <div id="btn-guard" class="action-btn touch-only">GUARD</div>
+    <div id="btn-fury" class="action-btn touch-only">FURY</div>
+    <div id="fury-bar">
+      <div id="fury-fill"></div>
+      <div id="fury-glow"></div>
+    </div>
+  </div>
+
+  <div id="title-screen" class="screen">
+    <h1>TUSK</h1>
+    <p>Run, jump, and horn-charge your way across the Skyshard Isles.<br><br>
+       <b>Desktop:</b> WASD to move &middot; Space to jump (&times;2 for double jump) &middot; Shift or Click to attack &middot; Q to guard &middot; F for fury mode &middot; drag mouse to look<br><br>
+       <b>Phone:</b> left stick to move &middot; JUMP / HORN / GUARD / FURY buttons &middot; drag right side to look</p>
+    <button id="btn-start">PLAY</button>
+  </div>
+
+  <div id="win-screen" class="screen hidden">
+    <h2>LEVEL CLEAR!</h2>
+    <div class="stats" id="win-stats"></div>
+    <button id="btn-replay">PLAY AGAIN</button>
+  </div>
+
+  <div id="death-screen" class="screen hidden">
+    <h2>WIPEOUT!</h2>
+    <p>Even unibears get knocked down. Get back up there.</p>
+    <button id="btn-retry">TRY AGAIN</button>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
