@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Enemy } from './enemy.js';
+import { grassTexture, dirtTexture, stoneTexture, wallTexture, crystalTexture, metalTexture } from './textures.js';
 
 const GRASS = 0x4CB860;
 const DIRT = 0x6A4A38;
@@ -21,14 +22,14 @@ export class Level {
     this.totalCrystals = 0;
 
     this._mats = {
-      grass: new THREE.MeshLambertMaterial({ color: GRASS }),
-      dirt: new THREE.MeshLambertMaterial({ color: DIRT }),
-      rock: new THREE.MeshLambertMaterial({ color: ROCK }),
-      mover: new THREE.MeshLambertMaterial({ color: 0x7A5CC8 }),
-      crystal: new THREE.MeshLambertMaterial({ color: CRYSTAL, emissive: 0x1A6E88 }),
-      spike: new THREE.MeshLambertMaterial({ color: 0x33303D }),
-      spikeTip: new THREE.MeshLambertMaterial({ color: 0xB8B4C8 }),
-      wall: new THREE.MeshLambertMaterial({ color: WALL_COLOR }),
+      grass: new THREE.MeshStandardMaterial({ map: grassTexture(), color: 0x4CB860, roughness: 0.85, metalness: 0.0 }),
+      dirt: new THREE.MeshStandardMaterial({ map: dirtTexture(), color: 0x6A4A38, roughness: 0.92, metalness: 0.0 }),
+      rock: new THREE.MeshStandardMaterial({ map: stoneTexture(), color: 0x4A3F55, roughness: 0.88, metalness: 0.05 }),
+      mover: new THREE.MeshStandardMaterial({ map: metalTexture(0x7A5CC8), color: 0x7A5CC8, roughness: 0.4, metalness: 0.6, emissive: 0x2A1848, emissiveIntensity: 0.15 }),
+      crystal: new THREE.MeshStandardMaterial({ map: crystalTexture(), color: 0x46D8FF, roughness: 0.15, metalness: 0.3, emissive: 0x1A6E88, emissiveIntensity: 0.8 }),
+      spike: new THREE.MeshStandardMaterial({ color: 0x33303D, roughness: 0.7, metalness: 0.3 }),
+      spikeTip: new THREE.MeshStandardMaterial({ color: 0xB8B4C8, roughness: 0.3, metalness: 0.6 }),
+      wall: new THREE.MeshStandardMaterial({ map: wallTexture(), color: 0x5A5070, roughness: 0.82, metalness: 0.05 }),
     };
 
     this._build();
@@ -188,7 +189,7 @@ export class Level {
     for (let i = 0; i < lines; i++) {
       const mark = new THREE.Mesh(
         new THREE.BoxGeometry(thickness + 0.02, 0.06, depth * 0.8),
-        new THREE.MeshLambertMaterial({ color: 0x3A3050 })
+        new THREE.MeshStandardMaterial({ color: 0x3A3050, roughness: 0.9, metalness: 0 })
       );
       mark.position.set(x, baseY + 1 + i * 1.5, z);
       this.scene.add(mark);
@@ -204,6 +205,12 @@ export class Level {
     const h = 0.5;
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(size, h, size), this._mats.mover);
     mesh.receiveShadow = true;
+    // Glowing edge trim
+    const trimGeo = new THREE.BoxGeometry(size + 0.1, 0.08, size + 0.1);
+    const trimMat = new THREE.MeshStandardMaterial({ color: 0x9B6FFF, emissive: 0x6040C0, emissiveIntensity: 0.8, roughness: 0.2, metalness: 0.5 });
+    const trim = new THREE.Mesh(trimGeo, trimMat);
+    trim.position.y = 0.26; // top edge of platform
+    mesh.add(trim);
     this.scene.add(mesh);
     const collider = this.physics.addBox(
       new THREE.Vector3(a.x, a.y - h / 2, a.z),
@@ -248,11 +255,11 @@ export class Level {
     const group = new THREE.Group();
     const pole = new THREE.Mesh(
       new THREE.CylinderGeometry(0.06, 0.06, 2.4, 6),
-      new THREE.MeshLambertMaterial({ color: 0xCCCCCC })
+      new THREE.MeshStandardMaterial({ color: 0xCCCCCC, roughness: 0.3, metalness: 0.7 })
     );
     pole.position.y = 1.2;
     group.add(pole);
-    const flagMat = new THREE.MeshLambertMaterial({ color: 0x888888, side: THREE.DoubleSide });
+    const flagMat = new THREE.MeshStandardMaterial({ color: 0x888888, side: THREE.DoubleSide, roughness: 0.8, metalness: 0 });
     const flag = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.5), flagMat);
     flag.position.set(0.45, 2.0, 0);
     group.add(flag);
@@ -276,7 +283,7 @@ export class Level {
     const group = new THREE.Group();
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(1.6, 0.22, 10, 28),
-      new THREE.MeshLambertMaterial({ color: 0xFFD75E, emissive: 0x886600 })
+      new THREE.MeshStandardMaterial({ color: 0xFFD75E, emissive: 0x886600, emissiveIntensity: 0.6, roughness: 0.2, metalness: 0.8 })
     );
     ring.position.y = 2.2;
     group.add(ring);
@@ -297,7 +304,7 @@ export class Level {
 
   _addDecor() {
     // drifting puffy clouds
-    const cloudMat = new THREE.MeshLambertMaterial({ color: 0xEDE6F5 });
+    const cloudMat = new THREE.MeshStandardMaterial({ color: 0xEDE6F5, roughness: 1.0, metalness: 0.0 });
     for (let i = 0; i < 14; i++) {
       const cloud = new THREE.Group();
       const n = 3 + (i % 3);

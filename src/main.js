@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { Input } from './input.js';
 import { PhysicsWorld } from './physics.js';
 import { FollowCamera } from './camera.js';
@@ -6,6 +10,7 @@ import { Player } from './player.js';
 import { Level } from './level.js';
 import { Hud, Screens } from './hud.js';
 import { Sfx } from './audio.js';
+import { createEnvMap, createSkySphere, createDustParticles } from './textures.js';
 
 const KILL_Y = -8;
 const SLAM_SHOCKWAVE_RADIUS = 4;
@@ -18,10 +23,12 @@ const canvas = document.getElementById('game-canvas');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87B8E8);
-scene.fog = new THREE.Fog(0x87B8E8, 50, 150);
+scene.fog = new THREE.Fog(0xB0D0EC, 50, 150);
 
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
 
@@ -44,6 +51,42 @@ if (!input.isTouch) {
   sun.shadow.camera.top = 60;
   sun.shadow.camera.bottom = -120;
   sun.shadow.camera.far = 200;
+}
+
+// --- environment map for PBR reflections ---
+const envMap = createEnvMap(renderer);
+scene.environment = envMap;
+
+// --- gradient sky sphere (replaces flat background) ---
+const skySphere = createSkySphere();
+scene.add(skySphere);
+scene.background = null; // use sky sphere instead of flat color
+
+// --- rim/back light for character silhouette ---
+const rimLight = new THREE.DirectionalLight(0xA0C0FF, 0.6);
+rimLight.position.set(-15, 10, -20);
+scene.add(rimLight);
+
+// --- floating dust particles (desktop only) ---
+let dustParticles = null;
+if (!input.isTouch) {
+  dustParticles = createDustParticles(120);
+  scene.add(dustParticles);
+}
+
+// --- post-processing pipeline (desktop only) ---
+let composer = null;
+if (!input.isTouch) {
+  composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.35,  // strength
+    0.5,   // radius
+    0.85   // threshold
+  );
+  composer.addPass(bloom);
+  composer.addPass(new OutputPass());
 }
 
 // --- game objects ---
@@ -330,6 +373,10 @@ function frame(now) {
     updateGameplay(dt);
     updateShockwaveRings(dt);
     followCam.update(player.mesh.position, dt);
+    // Sky sphere follows camera so it never clips
+    skySphere.position.copy(camera.position);
+    // Dust particles drift near player
+    if (dustParticles) dustParticles.userData.update(dt, player.position);
   } else {
     // idle camera drift on menus
     level.update(dt, time);
@@ -337,10 +384,16 @@ function frame(now) {
     const r = 14;
     camera.position.set(Math.sin(time * 0.1) * r, 6, Math.cos(time * 0.1) * r);
     camera.lookAt(0, 1, -10);
+    skySphere.position.copy(camera.position);
   }
 
   input.endFrame();
-  renderer.render(scene, camera);
+  // Use composer (bloom) on desktop, direct render on mobile
+  if (composer) {
+    composer.render();
+  } else {
+    renderer.render(scene, camera);
+  }
 }
 requestAnimationFrame(frame);
 
@@ -350,4 +403,5 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  if (composer) composer.setSize(window.innerWidth, window.innerHeight);
 });
